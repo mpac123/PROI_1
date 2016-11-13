@@ -8,21 +8,32 @@
 class Zestaw
 {
 	public:
-		//Zestaw(); //konstruktor
+		~Zestaw(); //denstruktor
 
 		Karta ZwrocNajstarsza();
 		Karta ZwrocNajmlodsza();
+		
 		void DodajKarte(Karta);
-		Zestaw operator+(Zestaw);
-		Zestaw operator+=(Zestaw);
-		Zestaw& operator=(Zestaw&);
+		void DodajKarte(int,k);
+		void DodajKarte(figura,k);
 		
-		friend std::ostream& operator<<(std::ostream &ekran, Zestaw &z);
-		friend std::ostream& operator<<(std::ostream &ekran, Karta &z);
+		Zestaw& operator=(const Zestaw&);
+		Zestaw operator+(const Zestaw&);
+		Zestaw& operator+=(const Zestaw&);
+		Karta operator[](int);
 		
-	//private:
+	private:
 		std::vector<Karta> Set;	
-		//~Zestaw(); //destruktor
+		bool operator==(const Zestaw&);
+		
+		
+		
+		
+		
+		friend std::ostream& operator<<(std::ostream &ekran, const Zestaw &z);
+		//friend std::ostream& operator<<(std::ostream &ekran, const Karta &z);
+		
+		
 	
 };
 

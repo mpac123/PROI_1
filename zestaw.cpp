@@ -3,6 +3,11 @@
 #include <vector>
 #include <iostream>
 
+
+Zestaw::~Zestaw()
+{
+	Set.clear();
+}
 Karta Zestaw::ZwrocNajstarsza()
 {
 	if(!Set.size())
@@ -42,11 +47,80 @@ void Zestaw::DodajKarte(Karta nowa)
 		if (nowa==Set[i])
 			czy_powtorka++;
 	if(czy_powtorka)
+		std::cout << "Ta karta (" << nowa << ") juz jest w tym zestawie!\n";
+	else
+		Set.push_back(nowa);
+}
+
+void Zestaw::DodajKarte(int numer, k kolor)
+{
+	Karta nowa(numer,kolor);
+	int czy_powtorka=0;
+	for (int i=0; i<Set.size(); i++)
+		if (nowa==Set[i])
+			czy_powtorka++;
+	if(czy_powtorka)
 		std::cout << "Ta karta juz jest w tym zestawie!\n";
 	else
 		Set.push_back(nowa);
 }
-std::ostream& operator<<(std::ostream &ekran, Karta &z)
+
+void Zestaw::DodajKarte(figura f, k kolor)
+{
+	Karta nowa(f,kolor);
+	int czy_powtorka=0;
+	for (int i=0; i<Set.size(); i++)
+		if (nowa==Set[i])
+			czy_powtorka++;
+	if(czy_powtorka)
+		std::cout << "Ta karta juz jest w tym zestawie!\n";
+	else
+		Set.push_back(nowa);
+}
+
+bool Zestaw::operator==(const Zestaw& z)
+{
+	if (Set.size()!=z.Set.size())
+		return false;
+		
+	for (int i=0; i<z.Set.size(); i++)
+		if (Set[i]!=z.Set[i])
+			return false;
+	return true;
+}
+
+Zestaw& Zestaw::operator=(const Zestaw& z)
+{
+	if(&z==this)
+		return *this;
+	
+	Set.clear();
+	for (int i=0; i<z.Set.size(); i++)
+		DodajKarte(z.Set[i]);
+	return *this;
+}
+
+Karta Zestaw::operator[](int i)
+{
+	return Set[i];
+}
+
+Zestaw Zestaw::operator+(const Zestaw& z)
+{
+	Zestaw nowy=*this;
+	for (int i=0; i<z.Set.size(); i++)
+		nowy.DodajKarte(z.Set[i]);
+	return nowy;
+}
+
+Zestaw& Zestaw::operator+=(const Zestaw& z)
+{
+	for (int i=0; i<z.Set.size(); i++)
+		DodajKarte(z.Set[i]);
+	return *this;
+}
+
+std::ostream& operator<<(std::ostream &ekran, const Karta &z)
 {
 		if (z.numer==11)
 			ekran << "walet ";
@@ -70,7 +144,7 @@ std::ostream& operator<<(std::ostream &ekran, Karta &z)
 		
 	return ekran;
 }
-std::ostream& operator<<(std::ostream &ekran, Zestaw &z)
+std::ostream& operator<<(std::ostream &ekran, const Zestaw &z)
 {
 	for (int i=0; i<z.Set.size(); i++)
 	{

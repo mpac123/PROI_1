@@ -8,7 +8,7 @@ enum figura{walet=11,dama,krol,as};
 class Karta
 {
 	friend class Zestaw;
-	friend std::ostream& operator<<(std::ostream &ekran, Karta &z);
+	friend std::ostream& operator<<(std::ostream &ekran, const Karta &z);
 	
 public:	
 	k kolor;
@@ -17,10 +17,14 @@ public:
 	
 	Karta(figura,k); //konstruktor(figura,kolor)
 	Karta(int,k); //konstruktor(numer,kolor)
+	Karta(const Karta&); //konstruktor kopiujacy
 	
+
 	bool operator==(Karta);
+	bool operator!=(Karta);
 	bool operator>(Karta);
 	bool operator<(Karta);
+	Karta& operator=(const Karta&);
 };
 
 #endif
