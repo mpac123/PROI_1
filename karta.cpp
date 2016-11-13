@@ -1,4 +1,5 @@
 #include "karta.h"
+#include <iostream>
 
 Karta::Karta(figura F,k K)
 	: f(F), kolor(K)
