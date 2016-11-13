@@ -3,7 +3,6 @@
 #include <vector>
 #include <iostream>
 
-
 Zestaw::~Zestaw()
 {
 	Set.clear();
