@@ -8,7 +8,7 @@
 class Zestaw
 {
 	public:
-		~Zestaw(); //denstruktor
+		~Zestaw(); //destruktor
 
 		Karta ZwrocNajstarsza();
 		Karta ZwrocNajmlodsza();
@@ -26,14 +26,8 @@ class Zestaw
 		std::vector<Karta> Set;	
 		bool operator==(const Zestaw&);
 		
-		
-		
-		
-		
 		friend std::ostream& operator<<(std::ostream &ekran, const Zestaw &z);
-		//friend std::ostream& operator<<(std::ostream &ekran, const Karta &z);
-		
-		
+	
 	
 };
 
